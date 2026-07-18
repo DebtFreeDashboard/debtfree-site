@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Authorization Complete</title>
+<style>
+  body { font-family: -apple-system, Segoe UI, Arial, sans-serif; max-width: 680px; margin: 60px auto; padding: 0 24px; color: #222; text-align: center; }
+  h1 { font-size: 1.3em; }
+  #code-box { font-family: Consolas, monospace; font-size: 1.05em; background: #f4f7f5; border: 2px solid #2a7a4b; border-radius: 8px; padding: 18px; margin: 24px 0; word-break: break-all; user-select: all; }
+  button { background: #2a7a4b; color: #fff; border: none; border-radius: 6px; padding: 12px 28px; font-size: 1em; cursor: pointer; }
+  .note { color: #777; font-size: 0.9em; margin-top: 20px; }
+  #copied { color: #2a7a4b; font-weight: bold; visibility: hidden; }
+</style>
+</head>
+<body>
+<h1>Authorization complete</h1>
+<p>Copy the code below and paste it back where you were asked for it.</p>
+<div id="code-box">No code found in this page's address. Make sure you arrived here from the authorization screen.</div>
+<button onclick="copyCode()">Copy code</button>
+<p id="copied">Copied!</p>
+<p class="note">This page runs entirely in your browser. The code is not sent anywhere.</p>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+  if (code) document.getElementById('code-box').textContent = code;
+  function copyCode() {
+    if (!code) return;
+    navigator.clipboard.writeText(code).then(() => {
+      document.getElementById('copied').style.visibility = 'visible';
+    });
+  }
+</script>
+</body>
+</html>
